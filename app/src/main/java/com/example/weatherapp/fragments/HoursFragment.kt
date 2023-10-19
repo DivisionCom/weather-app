@@ -65,8 +65,6 @@ class HoursFragment : Fragment() {
         rcView.layoutManager = LinearLayoutManager(activity)
         adapter = WeatherAdapter()
         rcView.adapter = adapter
-
-
     }
 
     companion object {
