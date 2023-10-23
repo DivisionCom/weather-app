@@ -24,6 +24,7 @@ import com.example.weatherapp.databinding.FragmentMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
+import kotlin.math.roundToInt
 
 const val API_KEY = "b78a0b779d94463fb0580022231408"
 
@@ -66,12 +67,13 @@ class MainFragment : Fragment() {
     private fun updateCurrentCard() = with(binding){
         model.liveDataCurrent.observe(viewLifecycleOwner){
             val maxMinTemp = "${it.maxTemp}℃ / ${it.minTemp}℃"
+            val maxMinTempRound = "${it.maxTemp.toDouble().roundToInt()}°C/${it.minTemp.toDouble().roundToInt()}°C"
             val currentTemp = "${it.currentTemp}℃"
             tvData.text = it.time
             tvCity.text = it.city
             tvCondition.text = it.condition
-            tvCurrentTemp.text = currentTemp
-            tvMaxMin.text = maxMinTemp
+            tvCurrentTemp.text = if(it.currentTemp.isEmpty()) maxMinTempRound else currentTemp
+            tvMaxMin.text = if(it.currentTemp.isEmpty()) "" else maxMinTemp
             Picasso.get().load("https:" + it.imageUrl).into(imWeather)
         }
     }
