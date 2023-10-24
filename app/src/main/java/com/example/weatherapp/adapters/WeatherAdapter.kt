@@ -22,8 +22,9 @@ class WeatherAdapter(val listener: Listener?) : ListAdapter<WeatherModel, Weathe
         }
 
         fun bind(item: WeatherModel) = with(binding){
+            val tvDateItalic = "${item.time}\u00A0"
             itemTemp = item
-            tvDate.text = item.time
+            tvDate.text = tvDateItalic
             tvCondition.text = item.condition
             tvTemp.text = item.currentTemp.ifEmpty {
                 "${item.maxTemp.toDouble().roundToInt()}°C/${item.minTemp.toDouble().roundToInt()}°C"

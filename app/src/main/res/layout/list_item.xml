@@ -20,8 +20,10 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/open_sans_light"
-            android:text="Lunes 22/12/2022"
+            android:text="22/12/2022 22:00"
+            android:textColor="@color/white"
             android:textSize="16sp"
+            android:textStyle="italic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

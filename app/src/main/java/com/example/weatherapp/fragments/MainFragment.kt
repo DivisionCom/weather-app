@@ -146,9 +146,9 @@ class MainFragment : Fragment() {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
         val formatted = LocalDateTime.parse(date, formatter)
         return if (formatted.minute.toString() == "0") {
-            "Last updated: ${formatted.hour}:${formatted.minute}0"
+            "Last updated: ${formatted.hour}:${formatted.minute}0\u00A0"
         } else {
-            "Last updated: ${formatted.hour}:${formatted.minute}"
+            "Last updated: ${formatted.hour}:${formatted.minute}\u00A0"
         }
     }
 
