@@ -23,19 +23,18 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.weatherapp.DialogManager
 import com.example.weatherapp.MainViewModel
-import com.example.weatherapp.R
 import com.example.weatherapp.adapters.VpAdapter
 import com.example.weatherapp.adapters.WeatherModel
-import com.example.weatherapp.databinding.ActivityMainBinding
 import com.example.weatherapp.databinding.FragmentMainBinding
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
 
 const val API_KEY = "b78a0b779d94463fb0580022231408"
@@ -143,6 +142,16 @@ class MainFragment : Fragment() {
         }
     }
 
+    private fun timeLastUpd(date: String): String {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+        val formatted = LocalDateTime.parse(date, formatter)
+        return if (formatted.minute.toString() == "0") {
+            "Last updated: ${formatted.hour}:${formatted.minute}0"
+        } else {
+            "Last updated: ${formatted.hour}:${formatted.minute}"
+        }
+    }
+
     private fun permissionListener(){
         pLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
             Toast.makeText(activity, "Permission is $it", Toast.LENGTH_LONG).show()
@@ -185,9 +194,10 @@ class MainFragment : Fragment() {
     }
 
     private fun parseCurrentData(mainObject: JSONObject, weatherItem: WeatherModel){
+        val timeHoursMin = timeLastUpd(mainObject.getJSONObject("current").getString("last_updated"))
         val item = WeatherModel(
             city = mainObject.getJSONObject("location").getString("name"),
-            time = mainObject.getJSONObject("current").getString("last_updated"),
+            time = timeHoursMin,
             condition = mainObject.getJSONObject("current").getJSONObject("condition")
                 .getString("text"),
             currentTemp = mainObject.getJSONObject("current").getString("temp_c"),
