@@ -23,7 +23,7 @@
             android:text="22/12/2022 22:00"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:textStyle="italic"
+            android:textStyle="bold|italic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,6 +57,7 @@
             android:fontFamily="@font/open_sans_light"
             android:gravity="center"
             android:text="25°C"
+            android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
