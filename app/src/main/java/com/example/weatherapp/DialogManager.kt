@@ -7,8 +7,8 @@ object DialogManager {
     fun locationSettingsDialog(context: Context, listener: Listener){
         val builder = AlertDialog.Builder(context)
         val dialog = builder.create()
-        dialog.setTitle("Enable location?")
-        dialog.setMessage("Location disabled, do you want to enable location?")
+        dialog.setTitle("GPS disabled")
+        dialog.setMessage("Do you want to enable GPS?")
         dialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK"){_,_, ->
             listener.onClick()
             dialog.dismiss()
